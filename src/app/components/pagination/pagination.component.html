@@ -1,0 +1,38 @@
+<div class="w-full flex items-center justify-center space-x-4 p-4 bg-red-100 rounded-md">
+    <button 
+      (click)="prevPage()" 
+      id="prev-button"
+      [disabled]="userService.currentPage === 1" 
+      class="px-4 py-2 border border-red-300 rounded-md text-gray-700 bg-white hover:bg-red-300 hover:text-white disabled:opacity-50">
+      &laquo; Prev
+    </button>
+  
+    <div class="flex space-x-2">
+      <button 
+        *ngFor="let page of pages" 
+        (click)="changePage(page)" 
+        [class.bg-red-500]="userService.currentPage === page"
+        [class.text-white]="userService.currentPage === page"
+        [class.bg-white]="userService.currentPage !== page"
+        [class.text-blue-500]="userService.currentPage !== page"
+        class="px-3 py-2 border border-red-300 rounded-md hover:bg-red-300 hover:text-white transition">
+        {{ page }}
+      </button>
+    </div>
+  
+    <button 
+      (click)="nextPage()" 
+      id="next-button"
+      [disabled]="userService.currentPage === userService.totalPages" 
+      class="px-4 py-2 border border-red-300 rounded-md text-gray-700 bg-white hover:bg-red-300 hover:text-white disabled:opacity-50">
+      Next &raquo;
+    </button>
+  
+    <select 
+      [(ngModel)]="rowCount" 
+      (change)="changeRowCount(rowCount)" 
+      class="ml-4 px-3 py-2 border border-red-300 rounded-md bg-white text-gray-700 hover:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-400">
+      <option *ngFor="let count of allRowCounts" [value]="count">{{ count }}</option>
+    </select>
+  </div>
+    

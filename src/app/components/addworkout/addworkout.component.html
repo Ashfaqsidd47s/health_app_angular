@@ -1,0 +1,67 @@
+<form (ngSubmit)="handleSubmit()" class="p-6 w-[400px] bg-gray-100 rounded-lg shadow-lg shadow-red-300 z-50">
+    <h1 class="text-center text-2xl font-semibold mb-4">Add Workout</h1>
+  
+    <div class="mb-4">
+      <label for="userName" class="block text-sm font-medium text-gray-700">User Name</label>
+      <input 
+        id="userName" 
+        type="text" 
+        [(ngModel)]="userName" 
+        name="userName" 
+        (blur)="formTouched.userName = true"
+        class="mt-1 block w-full p-2 border border-red-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-300 focus:border-red-200" 
+        placeholder="Enter your username"
+        required 
+      />
+      <div class="h-1 text-red-500 text-xs">{{ getValidationError('userName') }}</div>
+    </div>
+  
+    <div class="mb-4">
+      <label for="duration" class="block text-sm font-medium text-gray-700">Duration (Minutes)</label>
+      <input 
+        id="duration" 
+        type="number" 
+        [(ngModel)]="duration" 
+        name="duration" 
+        (blur)="formTouched.duration = true"
+        class="mt-1 block w-full p-2 border border-red-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-300 focus:border-red-200" 
+        placeholder="Enter workout duration"
+        required 
+      />
+      <div class="h-1 text-red-500 text-xs">{{ getValidationError('duration') }}</div>
+    </div>
+  
+    <div class="mb-4">
+      <label for="workoutType" class="block text-sm font-medium text-gray-700">Workout Type</label>
+      <select 
+        id="workoutType" 
+        [(ngModel)]="workoutType"
+        (blur)="formTouched.workoutType = true" 
+        name="workoutType" 
+        class="mt-1 block w-full p-2 border border-red-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-300 focus:border-red-200" 
+        required>
+        <option value="">Select a workout</option>
+        <option *ngFor="let workout of allWorkouts" [value]="workout">{{ workout }}</option>
+      </select>
+      <div class="h-1 text-red-500 text-xs">{{ getValidationError('workoutType') }}</div>
+    </div>
+  
+    <button 
+      type="submit"
+      [disabled]="isSubmitting"
+      class="w-full py-2 px-4 bg-red-400 rounded-md hover:bg-red-500 disabled:bg-gray-400 flex items-center justify-center">
+      @if (isSubmitting) {
+        Loading...
+      } @else {
+        Add Workout
+      }
+    </button>
+</form>
+  
+  <!-- POPUP -->
+  @if (isSuccessfull) {
+    <div class="fixed bottom-6 right-6 w-[280px] h-[80px] rounded-lg bg-red-100 flex items-center justify-center shadow-lg shadow-red-500"> 
+      Workout Added Successfully 🎉🎉
+    </div>
+  }
+  

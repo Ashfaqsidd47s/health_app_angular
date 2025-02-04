@@ -1,0 +1,45 @@
+<section class=" w-full bg-red-50  flex items-center justify-center">
+    <div class=" p-3 w-full md:w-[90%] lg:w-[80%] flex gap-2 min-h-[calc(100vh-80px)]">
+        <div class=" w-1/5 bg-white h-full max-h-[calc(100vh - 80px)] overflow-y-auto rounded-md shadow-md shadow-gray-200">
+            @for (user of users; track user.id) {
+                <div
+                    (click)="selectUser(user.id)" 
+                    class="p-3 px-4 border-b border-b-gray-300 truncate cursor-pointer hover:bg-red-100" 
+                    [class.bg-red-300]="selectedUser().id === user.id"
+                >{{user.userName}}</div>
+            }
+        </div>
+        <div class="w-4/5 flex flex-col items-center gap-2 h-[inherit]"> 
+            <div class=" w-full h-full md:h-1/2 flex flex-col md:flex-row items-center gap-2 ">
+                <div class="w-full md:w-1/2 h-full bg-white flex flex-col p-4 relative pb-[80px] border border-red-100 rounded-lg shadow-md shadow-gray-100">
+                    <h2 class=" text-lg font-semibold mb-2">{{selectedUser().userName}}</h2>
+                    
+                    <p class="font-semibold italic text-gray-500 mb-3">workouts</p>
+                    <ul class="flex flex-wrap gap-6">
+                        @for (workout of selectedUser().workouts; track workout) {
+                            <li class="flex items-center gap-2 text-gray-700 bg-red-200 p-1 px-3 rounded-md font-semibold">
+                                <span >{{workout.type}}</span>
+                                <span class="text-red-500">{{workout.minutes}}</span>
+                            </li>
+                        }
+                    </ul>
+                    <div class=" p-4 w-full flex items-center justify-between  gap-1 absolute left-0 bottom-0 bg-red-100 rounded-lg">
+                        <p >Total Workouts: 
+                            <strong >{{ selectedUser().workouts.length }}</strong>
+                        </p>
+                        <p >Total Time: <strong>{{totalDuration}}(M)</strong></p>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2 h-full bg-white flex items-center justify-center rounded-md">
+                    @if (selectedUser() != null) {
+                        <app-pie [user]="selectedUser()" ></app-pie>
+                    }
+                </div>
+            </div>
+            <div class="w-full h-1/2 bg-white flex items-center justify-center rounded-md">
+                <app-chart [user]="selectedUser()" ></app-chart>
+            </div>
+        </div>
+    </div>
+</section>
+

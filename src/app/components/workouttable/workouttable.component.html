@@ -1,0 +1,61 @@
+<div class="w-[100%] p-4 bg-red-50 flex flex-col items-center justify-center">
+    <div class=" w-full md:w-[90%] lg:w-[80%]">
+      <h2 class="text-xl font-semibold text-gray-900 mb-4">User Data</h2>
+      <div class="p-4 py-3 flex items-center justify-between rounded-md shadow-sm bg-red-100 mb-1 ">
+        <div class="mb-4">
+          <label for="searchName" class="block text-sm font-medium text-gray-700">Search </label>
+          <input 
+            id="searchName" 
+            [(ngModel)]="searchName"
+            type="text" 
+            name="serarchName" 
+            (ngModelChange)="searchByName()"
+            class=" mt-1 block w-full p-2 border border-red-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500" 
+            placeholder="search by name"
+            required 
+          />
+        </div>
+        <div class="mb-4">
+          <label for="filterType" class="block text-sm font-medium text-gray-700">Workout Type</label>
+          <select 
+            id="filterType" 
+            [(ngModel)]="filterType" 
+            name="filterType" 
+            (ngModelChange)="filterByType()"
+            class="mt-1 block w-full p-2 border border-red-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:emerald-blue-500" 
+            required>
+            <option value="All">All</option>
+            <option *ngFor="let workout of allFilterWorkouts" [value]="workout">{{ workout }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="w-full  h-[450px] flex flex-col items-center justify-between overflow-hidden rounded-md shadow-md border border-gray-200 ">
+        <div class="w-full max-w-full bg-white shadow-sm">
+          <div class="bg-red-300 flex items-center px-4 py-2 font-semibold text-gray-700 border-b border-b-red-300">
+            <div class="w-1/4 px-4 py-3 text-left">Name</div>
+            <div class="w-1/4 px-4 py-3 text-left">Workouts</div>
+            <div class="w-1/4 px-4 py-3 text-left truncate">Number of Workouts</div>
+            <div class="w-1/4 px-4 py-3 text-left truncate">Total Minutes</div>
+          </div>
+          <div class="h-[300px] w-full overflow-y-auto">
+            <div
+              *ngFor="let data of tableFormatedData"
+              class="flex items-center w-full px-4 py-3 border-b border-gray-200 hover:bg-red-50"
+            >
+              <div class="w-1/4 px-4 text-left text-gray-900 truncate">{{ data.userName }}</div>
+              <div class="w-1/4 px-4 text-left text-gray-700 truncate">{{ data.workouts }}</div>
+              <div class="w-1/4 px-4 text-left text-gray-700">{{ data.count }}</div>
+              <div class="w-1/4 px-4 text-left text-gray-700">{{ data.totalTime }}</div>
+            </div>
+            <div *ngIf="userData.length === 0" class="mt-4 text-center text-gray-500">
+              No user data available.
+            </div>
+          </div>
+        </div>
+        <!-- pagination  -->
+        <app-pagination />
+      </div>
+    </div>
+  </div>
+  
+  

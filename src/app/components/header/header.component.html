@@ -1,0 +1,23 @@
+<header class="  sticky top-0 left-0 bg-red-100 z-50 flex items-center justify-center ">
+    <nav class="w-full md:w-[90%] lg:w-[80%] p-4 flex items-center justify-between gap-5  h-[60px]">
+        <div class="text-xl font-bold cursor-pointer" routerLink="/">Health App</div>
+        <ul class="flex items-center gap-4 cursor-pointer font-semibold">
+            <li 
+                class="hover:text-gray-600" 
+                routerLink="/"  
+                [class.text-gray-600]="isActive('/')"
+                >Home</li>
+            <li 
+                class="hover:text-gray-600" 
+                routerLink="/workouts"
+                [class.text-gray-600]="isActive('/workouts')"
+                >Workouts</li>
+            <li 
+                class="hover:text-gray-600" 
+                routerLink="/progress"
+                [class.text-gray-600]="isActive('/progress')"
+            >Progress</li>
+        </ul>
+        <button class="p-2 w-[100px] h-[40px] bg-red-400 rounded-md font-semibold hover:bg-red-500">Hire Me</button>
+    </nav>
+</header>

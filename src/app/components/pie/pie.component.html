@@ -1,0 +1,12 @@
+<div class="p-4 py-3 w-[calc(100% - 1rem)] h-[calc(100%-1rem)] relative">
+    <canvas baseChart 
+        [data]="chartData"
+        [options]="chartOptions"
+        type='pie'>
+    </canvas>
+    <div class="py-1 bg-red-50 w-[60px] border- border-red-400 flex flex-col items-center justify-center text-sm font-semibold rounded-lg absolute left-6 top-8">
+        <span>Total</span>
+        <span class=" font-bold text-red-500 ">{{ total}}</span>
+    </div>
+</div>
+  
